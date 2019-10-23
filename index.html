@@ -46,7 +46,7 @@
 			<img src="/img/avatar.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">test</a></h1>
+		  <h1 class="header-author"><a href="/">(╬▔皿▔)凸</a></h1>
 		</hgroup>
 		
 
@@ -98,7 +98,7 @@
 				<img src="/img/avatar.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">test</h1>
+			  <h1 class="header-author js-header-author">(╬▔皿▔)凸</h1>
 			</hgroup>
 			
 			
@@ -140,36 +140,42 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-No.15_多环境切换，注解与增删改返回值问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-No.22_使用逆向工程进行快速开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/">Mybatis</a>
+      <a class="article-title" href="/2019/10/23/No.22_使用逆向工程进行快速开发/">No.22_使用逆向工程进行快速开发</a>
     </h1>
   
 
         
-        <a href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/" class="archive-article-date">
-  	<time datetime="2019-10-23T12:40:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+        <a href="/2019/10/23/No.22_使用逆向工程进行快速开发/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:10:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#<strong>1、数据库环境切换</strong></p>
-<p>##a.先在congfig.properties文件里添加对应环境的配置信息</p>
-<p>##b.然后在MyBatis的配置文件中的<environments>标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)</environments></p>
-<p>##c.配置不同数据库的别名</p>
-<p>##d.写不同数据库下相同的SQL语句，并指定其环境</p>
-<p>##e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断</p>
-<p>##f.当然如果现在只有一条SQL语句，且并没有databaseID指定,MyBaties就会让它自适应当前数据库环境，但如果说有另外一条相同的语句并且它带着ID,那么MyBaties会优先使用它</p>
-<p>#<strong>2、增删改返回值问题</strong></p>
-<p>##返回值可以是void、Integer(整形:当为整形时，返回值代表成功了几个)、Long(长整形:和整形一样)、Boolean(布尔值:当为返回值时，代表操作是否成功)</p>
-<p>##如何操作？只需在接口中修改返回值即可！</p>
+        <h1 id="使用逆向工程进行快速开发"><a href="#使用逆向工程进行快速开发" class="headerlink" title="使用逆向工程进行快速开发"></a>使用逆向工程进行快速开发</h1><p><strong>逆向工程就是通过数据表自动生成对应的实体类，xml文件和接口文件。</strong></p>
+<h2 id="1、逆向工程的使用"><a href="#1、逆向工程的使用" class="headerlink" title="1、逆向工程的使用"></a>1、逆向工程的使用</h2><h3 id="a、导入jar包："><a href="#a、导入jar包：" class="headerlink" title="a、导入jar包："></a>a、导入jar包：</h3><p><strong>1：mybatis.jar</strong></p>
+<p><strong>2：对应数据库的驱动jar包，例如：mysql-connector-java.jar</strong></p>
+<p><strong>3：mybatis-generator-core.jar</strong></p>
+<h3 id="b、复制xml模板文件（generator-xml），修改生成路径名："><a href="#b、复制xml模板文件（generator-xml），修改生成路径名：" class="headerlink" title="b、复制xml模板文件（generator.xml），修改生成路径名："></a>b、复制xml模板文件（generator.xml），修改生成路径名：</h3><p><strong>具体模板文件如下：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE generatorConfiguration</span></span><br><span class="line"><span class="meta">        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"</span></span><br><span class="line"><span class="meta">        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">"DB2Tables"</span> <span class="attr">targetRuntime</span>=<span class="string">"MyBatis3"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                         suppressAllComments属性值：</span></span><br><span class="line"><span class="comment">                             true:自动生成实体类、SQL映射文件时没有注释</span></span><br><span class="line"><span class="comment">                             true:自动生成实体类、SQL映射文件，并附有注释</span></span><br><span class="line"><span class="comment">                       --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suppressAllComments"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 数据库连接信息 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">"com.mysql.jdbc.Driver"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/books"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">"root"</span>  <span class="attr">password</span>=<span class="string">"123456"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--      forceBigDecimals属性值：</span></span><br><span class="line"><span class="comment">                  true:把数据表中的DECIMAL和NUMERIC类型，解析为JAVA代码中的java.math.BigDecimal类型</span></span><br><span class="line"><span class="comment">                  false(默认):把数据表中的DECIMAL和NUMERIC类型，解析为解析为JAVA代码中的Integer类型</span></span><br><span class="line"><span class="comment">              --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"forceBigDecimals"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                  targetProject属性值:实体类的生成位置</span></span><br><span class="line"><span class="comment">                  targetPackage属性值：实体类所在包的路径</span></span><br><span class="line"><span class="comment">              --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"cn.JavaBean"</span></span></span><br><span class="line"><span class="tag">                            <span class="attr">targetProject</span>=<span class="string">".\src\main\java"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- trimStrings属性值：</span></span><br><span class="line"><span class="comment">                         true：对数据库的查询结果进行trim操作</span></span><br><span class="line"><span class="comment">                         false(默认)：不进行trim操作</span></span><br><span class="line"><span class="comment">                       --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"trimStrings"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                  targetProject属性值:SQL映射文件的生成位置</span></span><br><span class="line"><span class="comment">                  targetPackage属性值：SQL映射文件所在包的路径</span></span><br><span class="line"><span class="comment">              --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"cn.mapper"</span></span></span><br><span class="line"><span class="tag">                         <span class="attr">targetProject</span>=<span class="string">".\src\main\java"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 生成动态代理的接口（Mapper接口）  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">"XMLMAPPER"</span> <span class="attr">targetPackage</span>=<span class="string">"cn.mapper"</span> <span class="attr">targetProject</span>=<span class="string">".\src\main\java"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定数据库表  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">"booklist"</span>&gt;</span> <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="c、使用JAVA模板类一键生成（记得修改generator-xml的路径）"><a href="#c、使用JAVA模板类一键生成（记得修改generator-xml的路径）" class="headerlink" title="c、使用JAVA模板类一键生成（记得修改generator.xml的路径）"></a>c、使用JAVA模板类一键生成（记得修改generator.xml的路径）</h3><p><strong>具体Java模板类如下,使用方式为直接运行即可：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.MyBatisGenerator;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.ShellCallback;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.config.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.config.xml.ConfigurationParser;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.exception.InvalidConfigurationException;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.exception.XMLParserException;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.internal.DefaultShellCallback;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GeneratorTest</span> </span>&#123;<span class="comment">//逆向工程测试类(成功)</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            File file=<span class="keyword">new</span> File(<span class="string">"src/main/resources/generator.xml"</span>);<span class="comment">//generator.xml配置文件</span></span><br><span class="line">            List&lt;String&gt; waninglist=<span class="keyword">new</span> ArrayList&lt;String&gt;();<span class="comment">//生成文件时的警告信息</span></span><br><span class="line">            ConfigurationParser cp=<span class="keyword">new</span> ConfigurationParser(waninglist);<span class="comment">//通过这个类来生成Configuration类</span></span><br><span class="line">            Configuration config=cp.parseConfiguration(file);</span><br><span class="line">            DefaultShellCallback shellCallback=<span class="keyword">new</span> DefaultShellCallback(<span class="keyword">true</span>);<span class="comment">//是否覆盖原有的mapper或实体类文件</span></span><br><span class="line">            MyBatisGenerator generator=<span class="keyword">new</span> MyBatisGenerator(config,shellCallback,waninglist);<span class="comment">//逆向工程的核心类</span></span><br><span class="line">            generator.generate(<span class="keyword">null</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvalidConfigurationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (XMLParserException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="d、怎么使用"><a href="#d、怎么使用" class="headerlink" title="d、怎么使用"></a>d、怎么使用</h3><p><strong>1、编写Mybatis的配置文件：config.xml</strong></p>
+<p><strong>2、使用Example中的Criteria中添加查询条件，具体创建Criteria和添加条件的步骤如下：</strong></p>
+<p><strong>*注意：在Criteria中添加模糊查询条件时要自己手动将前后%号添加上</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment">    * 逆向工程中Example(中的Criteria才是查询条件)的使用方法</span></span><br><span class="line"><span class="comment">    * 相关技术名词QBC（query by criteria）</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> session</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span>  <span class="title">GeneratorTeat</span><span class="params">(SqlSession session)</span></span>&#123;</span><br><span class="line">       BooklistExample booklistExample=<span class="keyword">new</span> BooklistExample();</span><br><span class="line">       BooklistExample.Criteria criteria=booklistExample.createCriteria();<span class="comment">//创建Criteria查询条件</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//添加查询条件(除了使用and拼接条件以外还可以使用or)</span></span><br><span class="line">       criteria.andListidEqualTo(<span class="string">"1"</span>);<span class="comment">//查询id为一的记录</span></span><br><span class="line">       criteria.andListidLike(<span class="string">"1"</span>);<span class="comment">//模糊查询id和一有关的记录</span></span><br><span class="line">       <span class="comment">/***</span></span><br><span class="line"><span class="comment">        * criteria.andListidBetween("2","3");//查询列表id在二到三之间的列表</span></span><br><span class="line"><span class="comment">        * criteria.andListtypeEqualTo("游戏");//并且列表类型为“游戏”</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">       List&lt;Booklist&gt; booklists = session.getMapper(BooklistMapper.class).selectByExample(booklistExample);</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;booklists.size() ; i++) &#123;</span><br><span class="line">           System.out.println(booklists.get(i).toString());</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>booklistExample.or(criteria,criteria1)：</strong> 这个方法可以整合两个criteria,达到where  条件组（criteria）1  or  条件组2 的效果</p>
 
       
 
@@ -184,7 +190,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
         		</li>
       		
 		</ul>
@@ -193,7 +199,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/">true >></a>
+          <a class="article-more-a" href="/2019/10/23/No.22_使用逆向工程进行快速开发/">true >></a>
         </p>
       
 
@@ -223,33 +229,31 @@
 
 
   
-    <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-No.21_模糊查询的三种方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/01/test/">test</a>
+      <a class="article-title" href="/2019/10/23/No.21_模糊查询的三种方法/">No.21_模糊查询的三种方法</a>
     </h1>
   
 
         
-        <a href="/2019/09/01/test/" class="archive-article-date">
-  	<time datetime="2019-08-31T17:56:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
+        <a href="/2019/10/23/No.21_模糊查询的三种方法/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:09:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#一级标题</p>
-<p>##二级标题</p>
-<p>###三级标题</p>
-<p><code>$ re -rf /</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="模糊查询的三种方法"><a href="#模糊查询的三种方法" class="headerlink" title="模糊查询的三种方法"></a>模糊查询的三种方法</h1><h2 id="1、’-Value-’"><a href="#1、’-Value-’" class="headerlink" title="1、’%${Value}%’"></a>1、’%${Value}%’</h2><p><strong>${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误</strong></p>
+<h2 id="2、传值时直接把引号’-’加上"><a href="#2、传值时直接把引号’-’加上" class="headerlink" title="2、传值时直接把引号’%’加上"></a>2、传值时直接把引号’%’加上</h2><h2 id="3、标签"><a href="#3、标签" class="headerlink" title="3、标签"></a>3、<bind>标签</bind></h2><p><strong><bind>使用方法</bind></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--name:用来唯一标识这个bind,value：将传入的值custname和'%'++'%'拼接起来代表模糊查询--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bind</span> <span class="attr">name</span>=<span class="string">"queryname"</span> <span class="attr">value</span>=<span class="string">"'%'+custname+'%'"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><del>删除线</del><br><strong>加粗:hexo new , hexo g, hexo s, hexo d，category: 测试 (博客分类)</strong></p>
+<p><strong>在使用时直接#{queryname}调用即可</strong></p>
 
       
 
@@ -264,7 +268,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/测试//" class="article-tag-list-link color3">测试</a>
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
         		</li>
       		
 		</ul>
@@ -273,7 +277,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/01/test/">true >></a>
+          <a class="article-more-a" href="/2019/10/23/No.21_模糊查询的三种方法/">true >></a>
         </p>
       
 
@@ -303,40 +307,43 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-No.20_trim标签与Mybatis的内置参数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/01/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/10/23/No.20_trim标签与Mybatis的内置参数/">No.20_trim标签与Mybatis的内置参数</a>
     </h1>
   
 
         
-        <a href="/2019/09/01/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-31T16:58:05.340Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
+        <a href="/2019/10/23/No.20_trim标签与Mybatis的内置参数/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:08:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h1 id="SQL标签"><a href="#SQL标签" class="headerlink" title="SQL标签"></a>SQL标签</h1><h2 id="处理动态SQL拼接时开头第一个and的两种方式"><a href="#处理动态SQL拼接时开头第一个and的两种方式" class="headerlink" title="处理动态SQL拼接时开头第一个and的两种方式"></a>处理动态SQL拼接时开头第一个and的两种方式</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--SQL标签测试--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryCust_tableByONGL"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">resultType</span>=<span class="string">"Cust_table"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--select * from cust_table where 1=1--&gt;</span><span class="comment">&lt;!--去除语句中第一个and的第一种方式--&gt;</span></span><br><span class="line">        select * from cust_table</span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span><span class="comment">&lt;!--去除第一个and的第二种方式，直接为所有if标签套上where标签--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--test：填写判断条件，条件中的custid就是输入的参数。如果想知道更多，搜索‘ONGL’--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"custid != null and custid != ''"</span>&gt;</span><span class="comment">&lt;!--如果custid不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            and custid = #&#123;custid&#125;</span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"custname != null and custname != ''"</span>&gt;</span><span class="comment">&lt;!--如果custname不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            and custname like '%$&#123;custname&#125;%'   <span class="comment">&lt;!--注意这里使用的是$符号--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"nickname != null and nickname != ''"</span>&gt;</span><span class="comment">&lt;!--如果nickname不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            and nickname like '%$&#123;nickname&#125;%'</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><strong><if>标签：判断标签</if></strong></p>
+<p><strong><where>标签: 连接标签，可以自动处理拼接SQL语句中开头的第一个and，但是不能去除最后一个and</where></strong></p>
+<p><strong>扩展：<set>标签：在修改数据时可用</set></strong></p>
+<h2 id="标签：处理动态SQL拼接时开头第一个and的第三种方式"><a href="#标签：处理动态SQL拼接时开头第一个and的第三种方式" class="headerlink" title="标签：处理动态SQL拼接时开头第一个and的第三种方式"></a><trim>标签：处理动态SQL拼接时开头第一个and的第三种方式</trim></h2><p><strong><trim>标签：可以为语句加上前缀（prefix）或后缀（suffix），或者是覆盖掉语句的前缀或后缀，prefix=”where” 为SQL语句自动拼接where，prefixOverrides=”and” 自动去除（覆盖）拼接SQL语句中的第一个and；反之后缀也是相同的道理。</trim></strong></p>
+<p><strong>处理动态SQL拼接时开头第一个and：前缀方式（prefix）</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--trim标签测试（前缀）--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryCust_tableByONGL"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">resultType</span>=<span class="string">"Cust_table"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--select * from cust_table where 1=1--&gt;</span><span class="comment">&lt;!--去除语句中第一个and的第一种方式--&gt;</span></span><br><span class="line">        select * from cust_table</span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--prefix="where" 为SQL语句自动拼接where，prefixOverrides="and" 自动去除（覆盖）拼接SQL语句中的第一个and；反之后缀也是相同的道理--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"where"</span> <span class="attr">prefixOverrides</span>=<span class="string">"and"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--test：填写判断条件，条件中的custid就是输入的参数。如果想知道更多，搜索‘ONGL’--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"custid != null and custid != ''"</span>&gt;</span><span class="comment">&lt;!--如果custid不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            and custid = #&#123;custid&#125; </span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"custname != null and custname != ''"</span>&gt;</span><span class="comment">&lt;!--如果custname不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            and custname like '%$&#123;custname&#125;%'   <span class="comment">&lt;!--注意这里使用的是$符号--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"nickname != null and nickname != ''"</span>&gt;</span><span class="comment">&lt;!--如果nickname不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            and nickname like '%$&#123;nickname&#125;%'</span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">trim</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p><strong>处理动态SQL拼接时最后一个and：后缀方式（prefix）</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--trim标签测试（后缀）--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryCust_tableByONGL"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">resultType</span>=<span class="string">"Cust_table"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--select * from cust_table where 1=1--&gt;</span><span class="comment">&lt;!--去除语句中第一个and的第一种方式--&gt;</span></span><br><span class="line">        select * from cust_table</span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--prefix="where" 为SQL语句自动拼接where，suffixOverrides="and" 自动去除（覆盖）拼接SQL语句中的最后一个and--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"where"</span> <span class="attr">suffixOverrides</span>=<span class="string">"and"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--test：填写判断条件，条件中的custid就是输入的参数。如果想知道更多，搜索‘ONGL’--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"custid != null and custid != ''"</span>&gt;</span><span class="comment">&lt;!--如果custid不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            custid = #&#123;custid&#125; and  </span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"custname != null and custname != ''"</span>&gt;</span><span class="comment">&lt;!--如果custname不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            custname like '%$&#123;custname&#125;%' and   <span class="comment">&lt;!--注意这里使用的是$符号--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"nickname != null and nickname != ''"</span>&gt;</span><span class="comment">&lt;!--如果nickname不为空--&gt;</span></span><br><span class="line"></span><br><span class="line">            nickname like '%$&#123;nickname&#125;%' and </span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">trim</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h1 id="Mybatis内置参数"><a href="#Mybatis内置参数" class="headerlink" title="Mybatis内置参数"></a>Mybatis内置参数</h1><h2 id="parameter：Mybatis的输入参数，代表输入的对象，使用方法如下："><a href="#parameter：Mybatis的输入参数，代表输入的对象，使用方法如下：" class="headerlink" title="_parameter：Mybatis的输入参数，代表输入的对象，使用方法如下："></a>_parameter：Mybatis的输入参数，代表输入的对象，使用方法如下：</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryCust_tableByONGL"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">resultType</span>=<span class="string">"Cust_table"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--select * from cust_table where 1=1--&gt;</span><span class="comment">&lt;!--去除语句中第一个and的第一种方式--&gt;</span></span><br><span class="line">        select * from cust_table</span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--prefix="where" 为SQL语句自动拼接where，suffixOverrides="and" 自动去除（覆盖）拼接SQL语句中的最后一个and--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"where"</span> <span class="attr">suffixOverrides</span>=<span class="string">"and"</span>&gt;</span>    </span><br><span class="line">        <span class="comment">&lt;!--test：填写判断条件，条件中的custid就是输入的参数。如果想知道更多，搜索‘ONGL’--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"_parameter.custid != null and _parameter.custid != ''"</span>&gt;</span><span class="comment">&lt;!--这里的_parameter代表的就是MyBatis输入的Cust_table参数--&gt;</span></span><br><span class="line"></span><br><span class="line">            custid = #&#123;_parameter.custid&#125; and  </span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">trim</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+<p><strong>这里的_parameter代表的就是MyBatis输入的Cust_table参数，如果输入的是简单类型，那它就是简单类型本身，直接‘_parameter’使用即可。</strong></p>
+<p><strong>但要注意，使用时必须在大括号{里！</strong></p>
+<h2 id="databaseId：当前数据库ID。"><a href="#databaseId：当前数据库ID。" class="headerlink" title="_databaseId：当前数据库ID。"></a>_databaseId：当前数据库ID。</h2>
       
 
       
@@ -350,7 +357,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/helloWorld//" class="article-tag-list-link color1">helloWorld</a>
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
         		</li>
       		
 		</ul>
@@ -359,7 +366,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/01/hello-world/">true >></a>
+          <a class="article-more-a" href="/2019/10/23/No.20_trim标签与Mybatis的内置参数/">true >></a>
         </p>
       
 
@@ -389,6 +396,202 @@
 
 
   
+    <article id="post-No.19_鉴别器和别名问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/No.19_鉴别器和别名问题/">No.19_鉴别器和别名问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/No.19_鉴别器和别名问题/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ResultMap：字段和属性名的关系"><a href="#ResultMap：字段和属性名的关系" class="headerlink" title="ResultMap：字段和属性名的关系"></a>ResultMap：字段和属性名的关系</h1><h2 id="1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性"><a href="#1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性" class="headerlink" title="1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性"></a>1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性</h2><p>字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了</p>
+<p>xml：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--当表中的字段和类中的属性不一致时的映射测试，使用ResultMap--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"QueryCastByAnother"</span> <span class="attr">resultMap</span>=<span class="string">"custResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select custid ,custname ,telephone ,address from cust_table where custid=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 如果字段名和属性名不一致，需要使用resultMap来指定对应关系 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"custResultMap"</span> <span class="attr">type</span>=<span class="string">"Another_Cust_table"</span>&gt;</span><span class="comment">&lt;!--id：用来标识这个Map,type：为实体类名称--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--主键--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"custid"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span><span class="comment">&lt;!--column：表中的字段，property：就是类中的属性--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--普通字段--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"custname"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"telephone"</span> <span class="attr">property</span>=<span class="string">"tel"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"address"</span> <span class="attr">property</span>=<span class="string">"add"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>resultMap中：<id>标签表示表中的主键，<result>标签表示表中其余的普通字段</result></id></strong><br>接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当表中的字段和类中的属性不一致时的映射测试，使用ResultMap</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Another_Cust_table <span class="title">QueryCastByAnother</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、resultMap中的鉴别器（鉴别器：对查询结果进行分支处理）"><a href="#2、resultMap中的鉴别器（鉴别器：对查询结果进行分支处理）" class="headerlink" title="2、resultMap中的鉴别器（鉴别器：对查询结果进行分支处理）"></a>2、resultMap中的鉴别器（鉴别器：对查询结果进行分支处理）</h2><p><strong>在resultMap中，还可以使用鉴别器：对相同Sql中不同的字段值进行判断，从而进行不同的处理</strong></p>
+<p><strong>功能上类似于java中的Switch case,只能在resultMap中使用</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--鉴别器：对查询结果进行分支处理,以下例为例：如果所在地是‘陕西’则name等于custname，如果所在地是‘江苏’则name等于nickname--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--javaType：为column字段的类型，column：就是作为case的字段--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">discriminator</span> <span class="attr">javaType</span>=<span class="string">"string"</span> <span class="attr">column</span>=<span class="string">"address"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--如果address字段值为陕西--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">case</span> <span class="attr">value</span>=<span class="string">"陕西"</span> <span class="attr">resultType</span>=<span class="string">"Another_Cust_table"</span>&gt;</span><span class="comment">&lt;!--value：case字段（address）的值，resultType指定返回值的类型--&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">&lt;!--通过上面resultType指定的类型来确定property中的name属性，然后指定name的属性值就等于custname--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"custname"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">case</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--如果address字段值为江苏--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">case</span> <span class="attr">value</span>=<span class="string">"江苏"</span> <span class="attr">resultType</span>=<span class="string">"Another_Cust_table"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">&lt;!--name的属性值就等于nickname--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"nickname"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">case</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">discriminator</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：使用鉴别器discriminator时，需要为鉴别器中的case标签再一次指定返回类型（用来为case标签中的result的映射关系提供帮助），否则就会出现java.lang.NullPointerException错误</strong></p>
+<h1 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h1><p><strong>别名：不带包名的类名,并且不区分大小写</strong></p>
+<p><strong>1、单独定义别名</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--单独为cn.JavaBean.books类定义别名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">"cn.JavaBean.books"</span> <span class="attr">alias</span>=<span class="string">"Books"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2、批量定义别名（包含报本身以及其下的子包）</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--为cn.JavaBean包下的所有类批量定义别名·--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.JavaBean"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--为java.util包下的所有类批量定义别名·--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"java.util"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：如果在子包下定义了和父包相同的类名运行时会报错，程序会不知道该找那个类。</p>
+<p>解决方法就是在子包的类名上方用 @Alias(“AnotherName”) 注解定义别名</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/No.19_鉴别器和别名问题/">true >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-No.18_使用HashMap存储查询结果集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/No.18_使用HashMap存储查询结果集/">No.18_使用HashMap存储查询结果集</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/No.18_使用HashMap存储查询结果集/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:07:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="当向数据库插入的值为null时"><a href="#当向数据库插入的值为null时" class="headerlink" title="当向数据库插入的值为null时"></a>当向数据库插入的值为null时</h1><p>*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null</p>
+<p>*MySQL：如果插入的字段是null,可以正常执行（没有非空约束）</p>
+<p><strong>原因：</strong></p>
+<p>  各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。<br>  对于OTHER来说，MySQL能够处理（将OTHER类型当成NULL），但Oracle不行，这是数据库底层的问题，不宜深入研究</p>
+<p><strong>解决方法：</strong><br>  需手工告诉Oracle：将other转为null</p>
+<p>  方法一：具体就是在可能为空的属性值后面写上  ,jdbcType=NUll（意思是当出现的类型Oracle不会处理时，将改属性值改为null(简而言之就是将字段的默认值设为null),例如Other）即可，如下所示：<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"AddCust_table"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"custid"</span>&gt;</span></span><br><span class="line">    insert into cust_table values(#&#123;custid,jdbcType=NUll&#125;,#&#123;name&#125;,#&#123;telephone&#125;,#&#123;address&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>  方法二：在配置文件中更改</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--在全局，只要出现数据库解决不了的类型，就将它设为NULL--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">seting</span> <span class="attr">name</span>=<span class="string">"jdbcTypeForNull"</span> <span class="attr">value</span>=<span class="string">"NULL"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="返回值是HashMap的情况"><a href="#返回值是HashMap的情况" class="headerlink" title="返回值是HashMap的情况"></a>返回值是HashMap的情况</h1><h2 id="a-查询一个"><a href="#a-查询一个" class="headerlink" title="a.查询一个"></a>a.查询一个</h2><p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用HashMap来取得结果集--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryCust_tableByHashMao"</span> <span class="attr">resultType</span>=<span class="string">"HashMap"</span>&gt;</span></span><br><span class="line">    select custid "id",custname "name",telephone "tel",address "add" from cust_table</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回值为HashMap(查询一个)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HashMap&lt;String,Object&gt; <span class="title">queryCust_tableByHashMao</span><span class="params">(<span class="keyword">int</span> num)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>例：select custid “id”</p>
+<p>其中,custid为数据库字段名，“id”为custid的别名，用于在Map中get值时作为key使用（注意字段和别名一一对应）：map.get(“id”);</p>
+<p>当然，你也可以不起别名，key就是字段本身。</p>
+<h2 id="b-查询多个"><a href="#b-查询多个" class="headerlink" title="b.查询多个"></a>b.查询多个</h2><p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用HashMap来取得结果集（一堆）程序会自动封装为对应的JavaBean类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryCust_tablesByHashMao"</span> <span class="attr">resultType</span>=<span class="string">"HashMap"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">        select custid ,custname ,telephone ,address  from cust_table</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回值为HashMap</span></span><br><span class="line">   <span class="meta">@MapKey</span>(<span class="string">"custid"</span>)<span class="comment">//指定custid字段为Map的key</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> HashMap&lt;Integer,Cust_table&gt; <span class="title">queryCust_tablesByHashMao</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>@MapKey(“custid”)：指定表中的某一字段为map的key值(如果是Oracle数据库，字段名就要大写，例：@MapKey(“CUSTID”),具体请参考Oracle元数据)，至于表中的所有字段，程序会自动判断封装为对应的JavaBean类赋值给map的Value</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/No.18_使用HashMap存储查询结果集/">true >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -399,7 +602,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 test
+    		&copy; 2019 (╬▔皿▔)凸
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

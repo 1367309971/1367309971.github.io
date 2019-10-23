@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>test | GQW的GitBLog</title>
+  <title>No.17_Mybatis处理多个参数问题 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#一级标题 ##二级标题 ###三级标题 $ re -rf / 12345public class HelloWorld&amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello World&quot;);    &amp;#125;&amp;#125;  删除线加粗:hexo new , hexo g, h">
+  <meta name="description" content="参数问题目前基本上是将多个参数封装到一个JavaBean对象(有时这种方式也称为pojo),然后再使用该对象进行传递、 a.传入多个参数时，不用再mapper.xml中编写parameterType。1234567//多参数入参，添加数据(接口)public int AddCust_tableByLot(Integer custid,String name,String telephone,Str">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="http://yoursite.com/2019/09/01/test/index.html">
+<meta property="og:title" content="No.17_Mybatis处理多个参数问题">
+<meta property="og:url" content="http://yoursite.com/2019/10/23/No.17_Mybatis处理多个参数问题/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="#一级标题 ##二级标题 ###三级标题 $ re -rf / 12345public class HelloWorld&amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello World&quot;);    &amp;#125;&amp;#125;  删除线加粗:hexo new , hexo g, h">
+<meta property="og:description" content="参数问题目前基本上是将多个参数封装到一个JavaBean对象(有时这种方式也称为pojo),然后再使用该对象进行传递、 a.传入多个参数时，不用再mapper.xml中编写parameterType。1234567//多参数入参，添加数据(接口)public int AddCust_tableByLot(Integer custid,String name,String telephone,Str">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-09-02T04:50:02.471Z">
+<meta property="og:updated_time" content="2019-10-23T13:11:14.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test">
-<meta name="twitter:description" content="#一级标题 ##二级标题 ###三级标题 $ re -rf / 12345public class HelloWorld&amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello World&quot;);    &amp;#125;&amp;#125;  删除线加粗:hexo new , hexo g, h">
+<meta name="twitter:title" content="No.17_Mybatis处理多个参数问题">
+<meta name="twitter:description" content="参数问题目前基本上是将多个参数封装到一个JavaBean对象(有时这种方式也称为pojo),然后再使用该对象进行传递、 a.传入多个参数时，不用再mapper.xml中编写parameterType。1234567//多参数入参，添加数据(接口)public int AddCust_tableByLot(Integer custid,String name,String telephone,Str">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -142,33 +142,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-test" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-No.17_Mybatis处理多个参数问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      test
+      No.17_Mybatis处理多个参数问题
     </h1>
   
 
         
-        <a href="/2019/09/01/test/" class="archive-article-date">
-  	<time datetime="2019-08-31T17:56:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
+        <a href="/2019/10/23/No.17_Mybatis处理多个参数问题/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:06:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#一级标题</p>
-<p>##二级标题</p>
-<p>###三级标题</p>
-<p><code>$ re -rf /</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="参数问题"><a href="#参数问题" class="headerlink" title="参数问题"></a>参数问题</h1><p>目前基本上是将多个参数封装到一个JavaBean对象(有时这种方式也称为<strong>pojo</strong>),然后再使用该对象进行传递、</p>
+<h2 id="a-传入多个参数时，不用再mapper-xml中编写parameterType。"><a href="#a-传入多个参数时，不用再mapper-xml中编写parameterType。" class="headerlink" title="a.传入多个参数时，不用再mapper.xml中编写parameterType。"></a>a.传入多个参数时，不用再mapper.xml中编写parameterType。</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//多参数入参，添加数据(接口)</span><br><span class="line">public int AddCust_tableByLot(Integer custid,String name,String telephone,String address);</span><br><span class="line"></span><br><span class="line">&lt;!--多个参数入参，添加数据(mapper)--&gt;</span><br><span class="line">&lt;insert id=&quot;AddCust_tableByLot&quot;&gt;</span><br><span class="line">    insert into cust_table values (#&#123;custid&#125;,#&#123;name&#125;,#&#123;telephone&#125;,#&#123;address&#125;);</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
 
-<p><del>删除线</del><br><strong>加粗:hexo new , hexo g, hexo s, hexo d，category: 测试 (博客分类)</strong></p>
+<p><strong>但如果没有写注释的话就会报以下错误:</strong><br>Cause: org.apache.ibatis.binding.BindingException: Parameter ‘custid’ not found. Available parameters are [arg3, arg2, arg1, arg0, param3, param4, param1, param2]</p>
+<p>该错误的意思是找不到参数‘custid’,但可以使用其他可用的参数名[arg3, arg2, arg1, arg0, param3, param4, param1, param2],</p>
+<p>这些参数名都是系统默认的、可使用的参数名，至于程序为什么只报了找不到‘custid’异常,是因为程序在刚出这个错时，就已经抛错并停止了</p>
+<p><strong>至于解决方法一就是使用这两类参数之一,具体参数次序按参数后数字所示，例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//多参数入参，添加数据(接口)，使用系统默认参数名</span><br><span class="line">public int AddCust_tableByLot(Integer custid,String name,String telephone,String address);</span><br><span class="line"></span><br><span class="line">&lt;!--多个参数入参，添加数据(mapper)--&gt;</span><br><span class="line">&lt;insert id=&quot;AddCust_tableByLot&quot;&gt;</span><br><span class="line">    insert into cust_table values (#&#123;param1&#125;,#&#123;param2&#125;,#&#123;param3&#125;,#&#123;param4&#125;);</span><br><span class="line">    &lt;!--或insert into cust_table values (#&#123;arg0&#125;,#&#123;arg1&#125;,#&#123;arg2&#125;,#&#123;arg3&#125;);--&gt;</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="b、命名参数方式多参数入参"><a href="#b、命名参数方式多参数入参" class="headerlink" title="b、命名参数方式多参数入参"></a>b、命名参数方式多参数入参</h2><p><strong>如果觉得这两种参数不美观，也可以通过注解来使用自己定义的参数名，例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//多参数入参，添加数据(接口),使用注解的方式，注:@Param()中的属性名可以不与变量名一致，可自定义</span><br><span class="line">public int AddCust_tableByLot(@Param(&quot;custid&quot;) Integer custid,@Param(&quot;name&quot;) String name,@Param(&quot;telephone&quot;) String telephone,@Param(&quot;address&quot;) String address);</span><br><span class="line"></span><br><span class="line">&lt;!--多个参数入参，添加数据(mapper)--&gt;</span><br><span class="line">&lt;insert id=&quot;AddCust_tableByLot&quot;&gt;</span><br><span class="line">    insert into cust_table values (#&#123;custid&#125;,#&#123;name&#125;,#&#123;telephone&#125;,#&#123;address&#125;);</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>担当参数过多时，还是比较推荐使用JavaBean对象方式进行多参数入参！</strong></p>
+<h2 id="c、综合使用，同时使用简单类型和对象类型入参"><a href="#c、综合使用，同时使用简单类型和对象类型入参" class="headerlink" title="c、综合使用，同时使用简单类型和对象类型入参"></a>c、综合使用，同时使用简单类型和对象类型入参</h2><p><strong>可以通过使用命名参数的方式来混合入参，具体方式，如下例所示:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//入参测试</span><br><span class="line">Cust_table cust_table=new Cust_table();</span><br><span class="line">cust_table.setCustid(null);//提前设为空，为简单类型腾出空间</span><br><span class="line">cust_table.setName(&quot;大二&quot;);</span><br><span class="line">cust_table.setTelephone(&quot;12345654321&quot;);</span><br><span class="line">cust_table.setAddress(&quot;陕西西安&quot;);</span><br><span class="line">int isdown=session.getMapper(cust_tableMapper.class).AddCust_tableByLot(9,cust_table);//混合入参</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//多参数入参（接口），简单类型和对象类型混合入参</span><br><span class="line">public int AddCust_tableByLot(@Param(&quot;cid&quot;) Integer custid,@Param(&quot;cust&quot;) Cust_table custTable);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!--多个参数入参(mapper)，简单类型和对象类型混合入参--&gt;</span><br><span class="line">&lt;insert id=&quot;AddCust_tableByLot&quot;&gt;</span><br><span class="line">    insert into cust_table values (#&#123;cid&#125;,#&#123;cust.name&#125;,#&#123;cust.telephone&#125;,#&#123;cust.address&#125;);</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>调用对象类型的参数用:  对象名.对象中属性名   即可</strong></p>
 
       
 
@@ -204,7 +216,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/测试//" class="article-tag-list-link color3">测试</a>
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
         		</li>
       		
 		</ul>
@@ -259,7 +271,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/01/test/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/23/No.17_Mybatis处理多个参数问题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +285,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/23/No.18_使用HashMap存储查询结果集/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          No.15_多环境切换，注解与增删改返回值问题
+          No.18_使用HashMap存储查询结果集
         
       </div>
     </a>
   
   
-    <a href="/2019/09/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/10/23/No.16_事务提交与不同数据库的自增方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">No.16_事务提交与不同数据库的自增方式</div>
       <i class="icon-circle-right"></i>
     </a>
   
