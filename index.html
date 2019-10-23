@@ -140,6 +140,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-No.15_多环境切换，注解与增删改返回值问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/">Mybatis</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/" class="archive-article-date">
+  	<time datetime="2019-10-23T12:40:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#<strong>1、数据库环境切换</strong></p>
+<p>##a.先在congfig.properties文件里添加对应环境的配置信息</p>
+<p>##b.然后在MyBatis的配置文件中的<environments>标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)</environments></p>
+<p>##c.配置不同数据库的别名</p>
+<p>##d.写不同数据库下相同的SQL语句，并指定其环境</p>
+<p>##e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断</p>
+<p>##f.当然如果现在只有一条SQL语句，且并没有databaseID指定,MyBaties就会让它自适应当前数据库环境，但如果说有另外一条相同的语句并且它带着ID,那么MyBaties会优先使用它</p>
+<p>#<strong>2、增删改返回值问题</strong></p>
+<p>##返回值可以是void、Integer(整形:当为整形时，返回值代表成功了几个)、Long(长整形:和整形一样)、Boolean(布尔值:当为返回值时，代表操作是否成功)</p>
+<p>##如何操作？只需在接口中修改返回值即可！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/">true >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -166,7 +249,7 @@
 <p><code>$ re -rf /</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><del>删除线</del><br><strong>加粗:hexo new , hexo g, hexo s, hexo d</strong></p>
+<p><del>删除线</del><br><strong>加粗:hexo new , hexo g, hexo s, hexo d，category: 测试 (博客分类)</strong></p>
 
       
 

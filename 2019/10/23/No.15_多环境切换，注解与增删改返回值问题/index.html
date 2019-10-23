@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | GQW的GitBLog</title>
+  <title>Mybatis | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="#1、数据库环境切换 ##a.先在congfig.properties文件里添加对应环境的配置信息 ##b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库) ##c.配置不同数据库的别名 ##d.写不同数据库下相同的SQL语句，并指定其环境 ##e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/09/01/hello-world/index.html">
+<meta property="og:title" content="Mybatis">
+<meta property="og:url" content="http://yoursite.com/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="#1、数据库环境切换 ##a.先在congfig.properties文件里添加对应环境的配置信息 ##b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库) ##c.配置不同数据库的别名 ##d.写不同数据库下相同的SQL语句，并指定其环境 ##e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-09-02T04:49:29.934Z">
+<meta property="og:updated_time" content="2019-10-23T12:40:27.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Mybatis">
+<meta name="twitter:description" content="#1、数据库环境切换 ##a.先在congfig.properties文件里添加对应环境的配置信息 ##b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库) ##c.配置不同数据库的别名 ##d.写不同数据库下相同的SQL语句，并指定其环境 ##e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -142,39 +142,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-No.15_多环境切换，注解与增删改返回值问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Mybatis
     </h1>
   
 
         
-        <a href="/2019/09/01/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-31T16:58:05.340Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
+        <a href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/" class="archive-article-date">
+  	<time datetime="2019-10-23T12:40:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>#<strong>1、数据库环境切换</strong></p>
+<p>##a.先在congfig.properties文件里添加对应环境的配置信息</p>
+<p>##b.然后在MyBatis的配置文件中的<environments>标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)</environments></p>
+<p>##c.配置不同数据库的别名</p>
+<p>##d.写不同数据库下相同的SQL语句，并指定其环境</p>
+<p>##e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断</p>
+<p>##f.当然如果现在只有一条SQL语句，且并没有databaseID指定,MyBaties就会让它自适应当前数据库环境，但如果说有另外一条相同的语句并且它带着ID,那么MyBaties会优先使用它</p>
+<p>#<strong>2、增删改返回值问题</strong></p>
+<p>##返回值可以是void、Integer(整形:当为整形时，返回值代表成功了几个)、Long(长整形:和整形一样)、Boolean(布尔值:当为返回值时，代表操作是否成功)</p>
+<p>##如何操作？只需在接口中修改返回值即可！</p>
 
       
 
@@ -210,7 +207,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/helloWorld//" class="article-tag-list-link color1">helloWorld</a>
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -265,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/01/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -279,15 +276,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/01/test/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          test
-        
-      </div>
-    </a>
   
+    <a href="/2019/09/01/test/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">test</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
