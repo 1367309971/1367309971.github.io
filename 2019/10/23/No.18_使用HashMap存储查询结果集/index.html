@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="GQW的GitBLog">
 <meta property="og:description" content="当向数据库插入的值为null时*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null *MySQL：如果插入的字段是null,可以正常执行（没有非空约束） 原因：   各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。  对于OTHER来说，MySQL能够处理（将OTH">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:36:09.069Z">
+<meta property="og:updated_time" content="2019-10-23T13:46:15.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.18_使用HashMap存储查询结果集">
 <meta name="twitter:description" content="当向数据库插入的值为null时*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null *MySQL：如果插入的字段是null,可以正常执行（没有非空约束） 原因：   各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。  对于OTHER来说，MySQL能够处理（将OTH">
@@ -166,7 +166,7 @@
         <h1 id="当向数据库插入的值为null时"><a href="#当向数据库插入的值为null时" class="headerlink" title="当向数据库插入的值为null时"></a>当向数据库插入的值为null时</h1><p>*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null</p>
 <p>*MySQL：如果插入的字段是null,可以正常执行（没有非空约束）</p>
 <p><strong>原因：</strong></p>
-<p>  各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。<br>  对于OTHER来说，MySQL能够处理（将OTHER类型当成NULL），但Oracle不行，这是数据库底层的问题，不宜深入研究</p>
+<p>  各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。<br>  对于OTHER来说，MySQL能够处理（将OTHER类型当成NULL），但Oracle不行，这是数据库底层的问题，不宜深入研究<br>  <a id="more"></a></p>
 <p><strong>解决方法：</strong><br>  需手工告诉Oracle：将other转为null</p>
 <p>  方法一：具体就是在可能为空的属性值后面写上  ,jdbcType=NUll（意思是当出现的类型Oracle不会处理时，将改属性值改为null(简而言之就是将字段的默认值设为null),例如Other）即可，如下所示：<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"AddCust_table"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"custid"</span>&gt;</span></span><br><span class="line">    insert into cust_table values(#&#123;custid,jdbcType=NUll&#125;,#&#123;name&#125;,#&#123;telephone&#125;,#&#123;address&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>  方法二：在配置文件中更改</p>

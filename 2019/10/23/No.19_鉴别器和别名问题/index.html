@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>No.19_鉴别器和别名问题 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ResultMap：字段和属性名的关系1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了 xml： 1234567891011121314151617&amp;lt;!--当表中的字段和类中的属性不一致时的映射测试，使用ResultMap--&amp;gt;&amp;lt;s">
+  <meta name="description" content="ResultMap：字段和属性名的关系1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了">
 <meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="No.19_鉴别器和别名问题">
 <meta property="og:url" content="http://yoursite.com/2019/10/23/No.19_鉴别器和别名问题/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="ResultMap：字段和属性名的关系1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了 xml： 1234567891011121314151617&amp;lt;!--当表中的字段和类中的属性不一致时的映射测试，使用ResultMap--&amp;gt;&amp;lt;s">
+<meta property="og:description" content="ResultMap：字段和属性名的关系1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:36:14.556Z">
+<meta property="og:updated_time" content="2019-10-23T13:45:52.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.19_鉴别器和别名问题">
-<meta name="twitter:description" content="ResultMap：字段和属性名的关系1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了 xml： 1234567891011121314151617&amp;lt;!--当表中的字段和类中的属性不一致时的映射测试，使用ResultMap--&amp;gt;&amp;lt;s">
+<meta name="twitter:description" content="ResultMap：字段和属性名的关系1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -164,6 +164,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="ResultMap：字段和属性名的关系"><a href="#ResultMap：字段和属性名的关系" class="headerlink" title="ResultMap：字段和属性名的关系"></a>ResultMap：字段和属性名的关系</h1><h2 id="1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性"><a href="#1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性" class="headerlink" title="1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性"></a>1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性</h2><p>字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了</p>
+<a id="more"></a>
 <p>xml：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--当表中的字段和类中的属性不一致时的映射测试，使用ResultMap--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"QueryCastByAnother"</span> <span class="attr">resultMap</span>=<span class="string">"custResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select custid ,custname ,telephone ,address from cust_table where custid=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 如果字段名和属性名不一致，需要使用resultMap来指定对应关系 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"custResultMap"</span> <span class="attr">type</span>=<span class="string">"Another_Cust_table"</span>&gt;</span><span class="comment">&lt;!--id：用来标识这个Map,type：为实体类名称--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--主键--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"custid"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span><span class="comment">&lt;!--column：表中的字段，property：就是类中的属性--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--普通字段--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"custname"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"telephone"</span> <span class="attr">property</span>=<span class="string">"tel"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"address"</span> <span class="attr">property</span>=<span class="string">"add"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
