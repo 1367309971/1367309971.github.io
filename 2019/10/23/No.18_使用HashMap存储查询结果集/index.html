@@ -9,13 +9,14 @@
   <title>No.18_使用HashMap存储查询结果集 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="当向数据库插入的值为null时*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null *MySQL：如果插入的字段是null,可以正常执行（没有非空约束） 原因：   各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。  对于OTHER来说，MySQL能够处理（将OTH">
+<meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="No.18_使用HashMap存储查询结果集">
 <meta property="og:url" content="http://yoursite.com/2019/10/23/No.18_使用HashMap存储查询结果集/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
 <meta property="og:description" content="当向数据库插入的值为null时*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null *MySQL：如果插入的字段是null,可以正常执行（没有非空约束） 原因：   各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。  对于OTHER来说，MySQL能够处理（将OTH">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:11:59.306Z">
+<meta property="og:updated_time" content="2019-10-23T13:36:09.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.18_使用HashMap存储查询结果集">
 <meta name="twitter:description" content="当向数据库插入的值为null时*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null *MySQL：如果插入的字段是null,可以正常执行（没有非空约束） 原因：   各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。  对于OTHER来说，MySQL能够处理（将OTH">
@@ -216,6 +217,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
@@ -422,6 +434,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mybatis</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
