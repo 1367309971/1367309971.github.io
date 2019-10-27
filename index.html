@@ -140,95 +140,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-No.23_Mybatis架构和源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/No.23_Mybatis架构和源码分析/">No.23_Mybatis架构和源码分析</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/27/No.23_Mybatis架构和源码分析/" class="archive-article-date">
-  	<time datetime="2019-10-27T03:05:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Mybatix源码解析"><a href="#Mybatix源码解析" class="headerlink" title="Mybatix源码解析"></a>Mybatix源码解析</h1><p><strong>Mybatis中的运行步骤</strong></p>
-<h2 id="a、获取SqlSessionFactory对象"><a href="#a、获取SqlSessionFactory对象" class="headerlink" title="a、获取SqlSessionFactory对象"></a>a、获取SqlSessionFactory对象</h2><p><strong>运用XMLConfigBuilder中的parse()解析器</strong></p>
-<p>parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签</p>
-        
-          <a class="article-more-a" href="/2019/10/27/No.23_Mybatis架构和源码分析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/27/No.23_Mybatis架构和源码分析/">true >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-No.22_使用逆向工程进行快速开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -579,9 +490,99 @@
 
 
   
+    <article id="post-No.18_使用HashMap存储查询结果集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/No.18_使用HashMap存储查询结果集/">No.18_使用HashMap存储查询结果集</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/No.18_使用HashMap存储查询结果集/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:07:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="当向数据库插入的值为null时"><a href="#当向数据库插入的值为null时" class="headerlink" title="当向数据库插入的值为null时"></a>当向数据库插入的值为null时</h1><p>*Oracle：如果插入的字段是Null,提示错误：Other 而不是 null</p>
+<p>*MySQL：如果插入的字段是null,可以正常执行（没有非空约束）</p>
+<p><strong>原因：</strong></p>
+<p>  各个数据库， 在mybatis中对各种数据类型的默认值不一致，mybatis中，jdbcTypeForNull (如果是null),则默认值是OTHER。<br>  对于OTHER来说，MySQL能够处理（将OTHER类型当成NULL），但Oracle不行，这是数据库底层的问题，不宜深入研究<br>
+        
+          <a class="article-more-a" href="/2019/10/23/No.18_使用HashMap存储查询结果集/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/No.18_使用HashMap存储查询结果集/">true >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
