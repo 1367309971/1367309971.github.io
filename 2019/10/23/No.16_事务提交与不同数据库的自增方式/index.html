@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="GQW的GitBLog">
 <meta property="og:description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:46:38.333Z">
+<meta property="og:updated_time" content="2019-10-27T04:01:22.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.16_事务提交与不同数据库的自增方式">
 <meta name="twitter:description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
@@ -165,7 +165,7 @@
       
         <h1 id="事务-自动-提交"><a href="#事务-自动-提交" class="headerlink" title="事务(自动)提交"></a><strong>事务(自动)提交</strong></h1><h2 id="1、手动提交"><a href="#1、手动提交" class="headerlink" title="1、手动提交:"></a><strong>1、手动提交:</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Reader reader=Resource.getResourceAsReader(&quot;conf.xml&quot;)</span><br><span class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">Sqlsession session = sessionFactory.openSession();</span><br><span class="line">//执行SQL语句</span><br><span class="line">session.commit();//提交事务</span><br></pre></td></tr></table></figure>
 
-<a id="more"></a>
+<!--阅读全文-->
 <h2 id="2、自动提交-每个dml语句自动提交"><a href="#2、自动提交-每个dml语句自动提交" class="headerlink" title="2、自动提交:每个dml语句自动提交"></a><strong>2、自动提交:每个dml语句自动提交</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Reader reader=Resource.getResourceAsReader(&quot;conf.xml&quot;)</span><br><span class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">Sqlsession session = sessionFactory.openSession(true);</span><br><span class="line">//执行SQL语句</span><br></pre></td></tr></table></figure>
 
 <p><strong>总结:</strong> openSession()中什么函数都不写为手动提交，想要自动提交事务只需将openSession(true)方法中的函数写为true即可!</p>

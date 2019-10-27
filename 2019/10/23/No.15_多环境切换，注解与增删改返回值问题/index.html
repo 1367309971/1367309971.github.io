@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>No.15_多环境切换，注解与增删改返回值问题 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、数据库环境切换a.先在congfig.properties文件里添加对应环境的配置信息b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)">
+  <meta name="description" content="1、数据库环境切换a.先在congfig.properties文件里添加对应环境的配置信息b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库) c.配置不同数据库的别名d.写不同数据库下相同的SQL语句，并指定其环境e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断f.当然如果现在只有一">
 <meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="No.15_多环境切换，注解与增删改返回值问题">
 <meta property="og:url" content="http://yoursite.com/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="1、数据库环境切换a.先在congfig.properties文件里添加对应环境的配置信息b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)">
+<meta property="og:description" content="1、数据库环境切换a.先在congfig.properties文件里添加对应环境的配置信息b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库) c.配置不同数据库的别名d.写不同数据库下相同的SQL语句，并指定其环境e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断f.当然如果现在只有一">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:48:00.985Z">
+<meta property="og:updated_time" content="2019-10-27T04:01:28.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.15_多环境切换，注解与增删改返回值问题">
-<meta name="twitter:description" content="1、数据库环境切换a.先在congfig.properties文件里添加对应环境的配置信息b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)">
+<meta name="twitter:description" content="1、数据库环境切换a.先在congfig.properties文件里添加对应环境的配置信息b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库) c.配置不同数据库的别名d.写不同数据库下相同的SQL语句，并指定其环境e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断f.当然如果现在只有一">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -163,7 +163,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1、数据库环境切换"><a href="#1、数据库环境切换" class="headerlink" title="1、数据库环境切换"></a><strong>1、数据库环境切换</strong></h1><h2 id="a-先在congfig-properties文件里添加对应环境的配置信息"><a href="#a-先在congfig-properties文件里添加对应环境的配置信息" class="headerlink" title="a.先在congfig.properties文件里添加对应环境的配置信息"></a>a.先在congfig.properties文件里添加对应环境的配置信息</h2><h2 id="b-然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认-指定实际使用的数据库"><a href="#b-然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认-指定实际使用的数据库" class="headerlink" title="b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)"></a>b.然后在MyBatis的配置文件中的<environments>标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)</environments></h2><a id="more"></a>
+        <h1 id="1、数据库环境切换"><a href="#1、数据库环境切换" class="headerlink" title="1、数据库环境切换"></a><strong>1、数据库环境切换</strong></h1><h2 id="a-先在congfig-properties文件里添加对应环境的配置信息"><a href="#a-先在congfig-properties文件里添加对应环境的配置信息" class="headerlink" title="a.先在congfig.properties文件里添加对应环境的配置信息"></a>a.先在congfig.properties文件里添加对应环境的配置信息</h2><h2 id="b-然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认-指定实际使用的数据库"><a href="#b-然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认-指定实际使用的数据库" class="headerlink" title="b.然后在MyBatis的配置文件中的标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)"></a>b.然后在MyBatis的配置文件中的<environments>标签中写入对应的配置信息并指定为默认(指定实际使用的数据库)</environments></h2><!--阅读全文-->
 <h2 id="c-配置不同数据库的别名"><a href="#c-配置不同数据库的别名" class="headerlink" title="c.配置不同数据库的别名"></a>c.配置不同数据库的别名</h2><h2 id="d-写不同数据库下相同的SQL语句，并指定其环境"><a href="#d-写不同数据库下相同的SQL语句，并指定其环境" class="headerlink" title="d.写不同数据库下相同的SQL语句，并指定其环境"></a>d.写不同数据库下相同的SQL语句，并指定其环境</h2><h2 id="e-两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断"><a href="#e-两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断" class="headerlink" title="e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断"></a>e.两条相同语句具体执行哪一条，以当前实际使用的数据库为准，这点在用databaseID声明后，使用时系统会自动判断</h2><h2 id="f-当然如果现在只有一条SQL语句，且并没有databaseID指定-MyBaties就会让它自适应当前数据库环境，但如果说有另外一条相同的语句并且它带着ID-那么MyBaties会优先使用它"><a href="#f-当然如果现在只有一条SQL语句，且并没有databaseID指定-MyBaties就会让它自适应当前数据库环境，但如果说有另外一条相同的语句并且它带着ID-那么MyBaties会优先使用它" class="headerlink" title="f.当然如果现在只有一条SQL语句，且并没有databaseID指定,MyBaties就会让它自适应当前数据库环境，但如果说有另外一条相同的语句并且它带着ID,那么MyBaties会优先使用它"></a>f.当然如果现在只有一条SQL语句，且并没有databaseID指定,MyBaties就会让它自适应当前数据库环境，但如果说有另外一条相同的语句并且它带着ID,那么MyBaties会优先使用它</h2><h1 id="2、增删改返回值问题"><a href="#2、增删改返回值问题" class="headerlink" title="2、增删改返回值问题"></a><strong>2、增删改返回值问题</strong></h1><h2 id="返回值可以是void、Integer-整形-当为整形时，返回值代表成功了几个-、Long-长整形-和整形一样-、Boolean-布尔值-当为返回值时，代表操作是否成功"><a href="#返回值可以是void、Integer-整形-当为整形时，返回值代表成功了几个-、Long-长整形-和整形一样-、Boolean-布尔值-当为返回值时，代表操作是否成功" class="headerlink" title="返回值可以是void、Integer(整形:当为整形时，返回值代表成功了几个)、Long(长整形:和整形一样)、Boolean(布尔值:当为返回值时，代表操作是否成功)"></a>返回值可以是void、Integer(整形:当为整形时，返回值代表成功了几个)、Long(长整形:和整形一样)、Boolean(布尔值:当为返回值时，代表操作是否成功)</h2><h2 id="如何操作？只需在接口中修改返回值即可！"><a href="#如何操作？只需在接口中修改返回值即可！" class="headerlink" title="如何操作？只需在接口中修改返回值即可！"></a>如何操作？只需在接口中修改返回值即可！</h2>
       
 

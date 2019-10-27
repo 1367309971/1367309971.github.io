@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>No.21_模糊查询的三种方法 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="模糊查询的三种方法1、’%${Value}%’${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误 2、传值时直接把引号’%’加上3、标签">
+  <meta name="description" content="模糊查询的三种方法1、’%${Value}%’${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误 2、传值时直接把引号’%’加上3、标签 使用方法 12&amp;lt;!--name:用来唯一标识这个bind,value：将传入的值custname和&apos;%&apos;++&apos;%&apos;拼接起来代表模糊查询--&amp;gt;&amp;lt;bind name=&quot;queryname&quot;">
 <meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="No.21_模糊查询的三种方法">
 <meta property="og:url" content="http://yoursite.com/2019/10/23/No.21_模糊查询的三种方法/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="模糊查询的三种方法1、’%${Value}%’${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误 2、传值时直接把引号’%’加上3、标签">
+<meta property="og:description" content="模糊查询的三种方法1、’%${Value}%’${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误 2、传值时直接把引号’%’加上3、标签 使用方法 12&amp;lt;!--name:用来唯一标识这个bind,value：将传入的值custname和&apos;%&apos;++&apos;%&apos;拼接起来代表模糊查询--&amp;gt;&amp;lt;bind name=&quot;queryname&quot;">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:42:00.380Z">
+<meta property="og:updated_time" content="2019-10-27T04:00:51.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.21_模糊查询的三种方法">
-<meta name="twitter:description" content="模糊查询的三种方法1、’%${Value}%’${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误 2、传值时直接把引号’%’加上3、标签">
+<meta name="twitter:description" content="模糊查询的三种方法1、’%${Value}%’${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误 2、传值时直接把引号’%’加上3、标签 使用方法 12&amp;lt;!--name:用来唯一标识这个bind,value：将传入的值custname和&apos;%&apos;++&apos;%&apos;拼接起来代表模糊查询--&amp;gt;&amp;lt;bind name=&quot;queryname&quot;">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -164,7 +164,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="模糊查询的三种方法"><a href="#模糊查询的三种方法" class="headerlink" title="模糊查询的三种方法"></a>模糊查询的三种方法</h1><h2 id="1、’-Value-’"><a href="#1、’-Value-’" class="headerlink" title="1、’%${Value}%’"></a>1、’%${Value}%’</h2><p><strong>${}符号原样输出。而#{}会自动添加引号，影响模糊查询的%号，变成’%’value’%’,从而出现语句错误</strong></p>
-<h2 id="2、传值时直接把引号’-’加上"><a href="#2、传值时直接把引号’-’加上" class="headerlink" title="2、传值时直接把引号’%’加上"></a>2、传值时直接把引号’%’加上</h2><h2 id="3、标签"><a href="#3、标签" class="headerlink" title="3、标签"></a>3、<bind>标签</bind></h2><a id="more"></a>
+<h2 id="2、传值时直接把引号’-’加上"><a href="#2、传值时直接把引号’-’加上" class="headerlink" title="2、传值时直接把引号’%’加上"></a>2、传值时直接把引号’%’加上</h2><h2 id="3、标签"><a href="#3、标签" class="headerlink" title="3、标签"></a>3、<bind>标签</bind></h2><!--阅读全文-->
 <p><strong><bind>使用方法</bind></strong></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--name:用来唯一标识这个bind,value：将传入的值custname和'%'++'%'拼接起来代表模糊查询--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bind</span> <span class="attr">name</span>=<span class="string">"queryname"</span> <span class="attr">value</span>=<span class="string">"'%'+custname+'%'"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 

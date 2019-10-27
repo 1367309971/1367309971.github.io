@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>No.23_Mybatis架构和源码分析 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签">
+  <meta name="description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签  并且Mybatis底层将所有的配置信息 放在了Configurat">
 <meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="No.23_Mybatis架构和源码分析">
 <meta property="og:url" content="http://yoursite.com/2019/10/27/No.23_Mybatis架构和源码分析/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签">
+<meta property="og:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签  并且Mybatis底层将所有的配置信息 放在了Configurat">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-27T03:57:33.604Z">
+<meta property="og:updated_time" content="2019-10-27T04:00:36.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.23_Mybatis架构和源码分析">
-<meta name="twitter:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签">
+<meta name="twitter:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签  并且Mybatis底层将所有的配置信息 放在了Configurat">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -166,7 +166,7 @@
         <h1 id="Mybatix源码解析"><a href="#Mybatix源码解析" class="headerlink" title="Mybatix源码解析"></a>Mybatix源码解析</h1><p><strong>Mybatis中的运行步骤</strong></p>
 <h2 id="a、获取SqlSessionFactory对象"><a href="#a、获取SqlSessionFactory对象" class="headerlink" title="a、获取SqlSessionFactory对象"></a>a、获取SqlSessionFactory对象</h2><p><strong>运用XMLConfigBuilder中的parse()解析器</strong></p>
 <p>parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签</p>
-<a id="more"></a>
+<!--阅读全文-->
 <p>并且Mybatis底层将所有的配置信息 放在了Configuration对象中</p>
 <p>解析所有的xxxMapper.xml文件</p>
 <p>&lt;select(等标签中的) id=”” resultType=”” parameterType=””（等属性 是通过parseStatementNode()解析的）&gt;，会将xxxMapper.xml中的<select>等标签解析成 MappedStatement对象（它代表一个增|删|改|查对象）</select></p>
