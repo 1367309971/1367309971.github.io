@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>No.16_事务提交与不同数据库的自增方式 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
+  <meta name="description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签  并且Mybatis底层将所有的配置信息 放在了Configurat">
 <meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="No.16_事务提交与不同数据库的自增方式">
-<meta property="og:url" content="http://yoursite.com/2019/10/23/No.16_事务提交与不同数据库的自增方式/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/10/23/No.23_Mybatis架构和源码分析/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
+<meta property="og:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签  并且Mybatis底层将所有的配置信息 放在了Configurat">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:46:38.333Z">
+<meta property="og:updated_time" content="2019-10-27T03:46:57.742Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="No.16_事务提交与不同数据库的自增方式">
-<meta name="twitter:description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
+<meta name="twitter:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签  并且Mybatis底层将所有的配置信息 放在了Configurat">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -143,7 +143,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-No.16_事务提交与不同数据库的自增方式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-No.23_Mybatis架构和源码分析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -155,7 +155,7 @@
   
 
         
-        <a href="/2019/10/23/No.16_事务提交与不同数据库的自增方式/" class="archive-article-date">
+        <a href="/2019/10/23/No.23_Mybatis架构和源码分析/" class="archive-article-date">
   	<time datetime="2019-10-23T13:05:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
         
@@ -163,25 +163,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="事务-自动-提交"><a href="#事务-自动-提交" class="headerlink" title="事务(自动)提交"></a><strong>事务(自动)提交</strong></h1><h2 id="1、手动提交"><a href="#1、手动提交" class="headerlink" title="1、手动提交:"></a><strong>1、手动提交:</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Reader reader=Resource.getResourceAsReader(&quot;conf.xml&quot;)</span><br><span class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">Sqlsession session = sessionFactory.openSession();</span><br><span class="line">//执行SQL语句</span><br><span class="line">session.commit();//提交事务</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-<h2 id="2、自动提交-每个dml语句自动提交"><a href="#2、自动提交-每个dml语句自动提交" class="headerlink" title="2、自动提交:每个dml语句自动提交"></a><strong>2、自动提交:每个dml语句自动提交</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Reader reader=Resource.getResourceAsReader(&quot;conf.xml&quot;)</span><br><span class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">Sqlsession session = sessionFactory.openSession(true);</span><br><span class="line">//执行SQL语句</span><br></pre></td></tr></table></figure>
-
-<p><strong>总结:</strong> openSession()中什么函数都不写为手动提交，想要自动提交事务只需将openSession(true)方法中的函数写为true即可!</p>
-<h1 id="自增问题"><a href="#自增问题" class="headerlink" title="自增问题"></a><strong>自增问题</strong></h1><h2 id="1、MyBatis回写操作"><a href="#1、MyBatis回写操作" class="headerlink" title="1、MyBatis回写操作"></a><strong>1、MyBatis回写操作</strong></h2><pre><code>字段自增属性: auto_increment  (自动增加)
-注:  实体类中整形的属性最好使用包装类，因为int形的包装类在没有赋予值的情况下是有默认值0的，这会影响SQL语句中的自增属性
-
-* Mysql数据库支持自增
-* Oracle数据库严格来说不支持自增 但能通过序列来模拟实现</code></pre><p>   <strong>字段自增属于Mysql的特性，当传入空值时，具有自增属性的字段回自动增加，但这仅仅只是在数据库中的操作，在将数据增加后,实体类中对应的字段仍然是空，那<br>    么，怎么样才能既让mysql发挥自己的特性，又让自增的数据回写回来呢？</strong><br>   <strong>很简单！</strong><br>   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--AddCust_table: 添加一个Cust_table， useGeneratedKeys="true"使用主键生成策略（使自增的主键可回写），keyProperty="custid":指定具体回写哪个键--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"AddCust_table"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"custid"</span>&gt;</span></span><br><span class="line">    inset into cust_table values (#&#123;custid&#125;,#&#123;name&#125;,#&#123;telephone&#125;,#&#123;address&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>   *获取回写的值也很简单</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> //自增的数据的回写</span><br><span class="line">Cust_table cust_table=new Cust_table();</span><br><span class="line">cust_table.setCustid(null);</span><br><span class="line">cust_table.setName(&quot;大一&quot;);</span><br><span class="line">cust_table.setTelephone(&quot;123456&quot;);</span><br><span class="line">cust_table.setAddress(&quot;陕西&quot;);</span><br><span class="line">int isdown=session.getMapper(cust_tableMapper.class).AddCust_table(cust_table);</span><br><span class="line">System.out.println(&quot;回写的键为:&quot;+cust_table.getCustid());//直接取就行了，但只能在语句执行完成之后才可以</span><br></pre></td></tr></table></figure>
-
-<p><strong>Oracle的解决方法:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">//首先，在数据库中创建一个自增序列，语句如下：</span><br><span class="line">创建    序列     myseq</span><br><span class="line">create sequence myseq</span><br><span class="line">            每次加1</span><br><span class="line">            increment by 1</span><br><span class="line">             从1开始</span><br><span class="line">            start with 1;</span><br><span class="line"> 这个序列自带两个值，且都在Oracle的默认表 dual中</span><br><span class="line">    nextval:自增后的值</span><br><span class="line">    currval:上一次自增的值</span><br><span class="line"></span><br><span class="line">方式一(先自增，后插入，推荐用这种！)、</span><br><span class="line">   通过&lt;insert&gt;的子标签&lt;selectKey&gt;实现:</span><br><span class="line">    在&lt;selectKey&gt;中查询下一个序列（自增后的值），再将此值传入keyProperty=&quot;需要自增的字段&quot;属性，最后真正</span><br><span class="line">    执行该sql时，使用改属性值。</span><br><span class="line">    &lt;!--增加一个学生Oracle--&gt;</span><br><span class="line">    &lt;insert id=&quot;addStudent&quot; parameterType=&quot;Student&quot; databaseId=&quot;oracle&quot;&gt;</span><br><span class="line">        &lt;selectKey keyProperty=&quot;stuNo&quot; resultType=&quot;Integer&quot; order=&quot;BEFORE&quot;&gt;</span><br><span class="line">                select myseq.nextval from dual</span><br><span class="line">        &lt;/selectKey&gt;</span><br><span class="line">    &lt;!--  这里的#&#123;stuNo&#125;就是上面keyProperty中的stuNo --&gt;</span><br><span class="line">        insert into student(stuno,stuName,stuAge,graName) values (#&#123;stuNo&#125;,#&#123;stuName&#125;,#&#123;stuAge&#125;,#&#123;graName&#125;)</span><br><span class="line">    &lt;/insert&gt;</span><br><span class="line"></span><br><span class="line">方式二(先插入，后查询)、</span><br><span class="line">   将order设为AFTER,改为先自增插入，后查询刚才自增后的值再返回</span><br><span class="line">    &lt;!--增加一个学生Oracle--&gt;</span><br><span class="line">    &lt;insert id=&quot;addStudent&quot; parameterType=&quot;Student&quot; databaseId=&quot;oracle&quot;&gt;</span><br><span class="line">        &lt;selectKey keyProperty=&quot;stuNo&quot; resultType=&quot;Integer&quot; order=&quot;AFTER&quot;&gt;</span><br><span class="line">                select myseq.currval from dual</span><br><span class="line">        &lt;/selectKey&gt;</span><br><span class="line">        insert into student(stuno,stuName,stuAge,graName) values (myseq.nextval,#&#123;stuName&#125;,#&#123;stuAge&#125;,#&#123;graName&#125;)</span><br><span class="line">    &lt;/insert&gt;</span><br></pre></td></tr></table></figure>
-
-
-
+        <h1 id="Mybatix源码解析"><a href="#Mybatix源码解析" class="headerlink" title="Mybatix源码解析"></a>Mybatix源码解析</h1><p><strong>Mybatis中的运行步骤</strong></p>
+<h2 id="a、获取SqlSessionFactory对象"><a href="#a、获取SqlSessionFactory对象" class="headerlink" title="a、获取SqlSessionFactory对象"></a>a、获取SqlSessionFactory对象</h2><p><strong>运用XMLConfigBuilder中的parse()解析器</strong></p>
+<p>parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签</p>
+<!--阅读更多-->
+<p>并且Mybatis底层将所有的配置信息 放在了Configuration对象中</p>
+<p>解析所有的xxxMapper.xml文件</p>
+<p>&lt;select(等标签中的) id=”” resultType=”” parameterType=””（等属性 是通过parseStatementNode()解析的）&gt;，会将xxxMapper.xml中的<select>等标签解析成 MappedStatement对象（它代表一个增|删|改|查对象）</select></p>
+<p>=====即 MappedStatement对象 就是 <select>等标签</select></p>
+<p>结论：MapperStatement存在于Configuration中，environment等配置文件中的标签也存在于Configuration,可得出结论：<strong>所有的配置信息、增删改标签 全部存在于Configuration中，Configuration又存在于DefaultSqlSessionFactory对象中，DefaultSqlSessionFactory对像就是外部使用的SqlSessionFactory对象</strong></p>
+<p>它们之间的包含关系：SqlSessionFactory对象 -&gt; DefaultSqlSessionFactory -&gt; Configuration -&gt; 包含了一切配置信息</p>
+<h2 id="b、获取SqlSession对象"><a href="#b、获取SqlSession对象" class="headerlink" title="b、获取SqlSession对象"></a>b、获取SqlSession对象</h2><p> configuration.newExecutor(tx,exectype)通过这个方法获取执行器，默认类型为Simple（SimpleExecutor）,参数tx的类型为Transaction,它提供事务处理，而方法本身则会根据不同的类型（execType)产生不同的执行器（Executor）</p>
+<p> 并对执行器进行拦截操作：executor = (Executor)interceptorChain.pluginAll(executor);也叫装饰模式，通过装饰（包装）模式，为executor加强一些功能，将其包装成为一个更为强大的executor</p>
+<p> //拦截器的作用：以后，如果给Mybatis写自己的插件，就可以通过拦截器实现</p>
+<p> //Mybatis的插件开发一共就两步：1、写插件；2、放入拦截器</p>
+<p> 返回new DefaultSqlSession(configuration,executor,是否自动提交事务)对象</p>
+<p> SqlSession怎么来的呢：SqlSession -&gt; openSession -&gt; openSessionFromDataSource() -&gt; DefaultSqlSession对象</p>
+<h2 id="c-d、获取xxxMapper代理对象-lt-代理接口中的方法、xxxMapper-xml文件中等标签-、执行等标签中定义的SQL语句"><a href="#c-d、获取xxxMapper代理对象-lt-代理接口中的方法、xxxMapper-xml文件中等标签-、执行等标签中定义的SQL语句" class="headerlink" title="c/d、获取xxxMapper代理对象 &lt;-(代理接口中的方法、xxxMapper.xml文件中等标签)、执行等标签中定义的SQL语句"></a>c/d、获取xxxMapper代理对象 &lt;-(代理接口中的方法、xxxMapper.xml文件中<select>等标签)、执行</select><select>等标签中定义的SQL语句</select></h2><p>   执行增删改查 -&gt; 被MapperProxy的invoke() 方法拦截 -&gt; invoke()方法又实现自InvocationHandler：JDK动态代理接口（用到了动态代理模式：将增删改查的执行权交给了代理对象：MapperProxy） -&gt; 最后代理对象帮我们“代理执行”增删改查方法</p>
+<p>   问：为什么xxxMapper是代理对象呢？答：因为它就是MapperProxy。</p>
+<p>   mapperMethod.execute(SqlSession,args)：实际调用增删改查的方法，依靠了SqlSession中的configuration 和 executor  </p>
+<p>   method.convertArgsToSqlCommandParam(args); ：处理增删改查方法的参数，如果参数是0个，return null;如果参数是1个，返回第一个参数；如果有多个参数，则将参数放到map中</p>
+<p>   如果查询条件只有一个，执行selectOne(); -&gt; 执行selectList() ：调用configuration.getMappedStatment(),即获取到增删改查的对象</p>
+<p>   boundSql：将我们写的SQL 和 参数值进行拼接后的对象，即最终最终能被真正执行的SQL</p>
+<p>   执行SQL 最中是通过Executor ，如果缓存中没有要查询的内容，则进入数据库 真实查询：queryFormDatabase()</p>
+<p>   核心对象StatmentHandler,是Statment对象的处理类  </p>
+<p>   MyBatis在底层使用的JDBC对象是PreparedStatement</p>
+<p>   底层执行增删改查：调用PreparedStatement的execute()方法执行</p>
+<p>   MyBatis底层在执行CRUD(增删改查)时 可能会涉及到四个处理器：StatementHandler  ParameterHandler  TypeHandler  ResultSetHandler</p>
+<p>   通过调试发现xxxMapper里包含：SqlSession[configuration,executor,事务]     mapperInterface接口代理对象     methodCache（存放查询缓存，底层是CurrentHashMap(可以处理高并发问题的Map)）</p>
+<h2 id="四大处理器Handler"><a href="#四大处理器Handler" class="headerlink" title="四大处理器Handler"></a>四大处理器Handler</h2><p>   <strong>StatementHandler：（根对象）处理对象PreparedStatement 的控制器</strong></p>
+<p>   <strong>ParameterHandler：处理参数 的控制器</strong></p>
+<p>   <strong>TypeHandler：类型转换 的控制器</strong></p>
+<p>   <strong>ResultSetHandler：处理结果集 的控制器</strong>      </p>
 
       
 
@@ -283,7 +296,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/23/No.16_事务提交与不同数据库的自增方式/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/23/No.23_Mybatis架构和源码分析/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +310,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/23/No.23_Mybatis架构和源码分析/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/23/No.17_Mybatis处理多个参数问题/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          No.16_事务提交与不同数据库的自增方式
+          No.17_Mybatis处理多个参数问题
         
       </div>
     </a>
   
   
-    <a href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">No.15_多环境切换，注解与增删改返回值问题</div>
+    <a href="/2019/10/23/No.16_事务提交与不同数据库的自增方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">No.16_事务提交与不同数据库的自增方式</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>No.16_事务提交与不同数据库的自增方式 | GQW的GitBLog</title>
+  <title>GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
-<meta name="keywords" content="Mybatis">
-<meta property="og:type" content="article">
-<meta property="og:title" content="No.16_事务提交与不同数据库的自增方式">
-<meta property="og:url" content="http://yoursite.com/2019/10/23/No.16_事务提交与不同数据库的自增方式/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="GQW的GitBLog">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-23T13:46:38.333Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No.16_事务提交与不同数据库的自增方式">
-<meta name="twitter:description" content="事务(自动)提交1、手动提交:12345Reader reader=Resource.getResourceAsReader(&amp;quot;conf.xml&amp;quot;)SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);Sqlsession session = sessionFactory.">
+<meta name="twitter:title" content="GQW的GitBLog">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -143,92 +138,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-No.16_事务提交与不同数据库的自增方式" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      No.16_事务提交与不同数据库的自增方式
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/01/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2019/10/23/No.16_事务提交与不同数据库的自增方式/" class="archive-article-date">
-  	<time datetime="2019-10-23T13:05:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+        <a href="/2019/09/01/hello-world/" class="archive-article-date">
+  	<time datetime="2019-08-31T16:58:05.340Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="事务-自动-提交"><a href="#事务-自动-提交" class="headerlink" title="事务(自动)提交"></a><strong>事务(自动)提交</strong></h1><h2 id="1、手动提交"><a href="#1、手动提交" class="headerlink" title="1、手动提交:"></a><strong>1、手动提交:</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Reader reader=Resource.getResourceAsReader(&quot;conf.xml&quot;)</span><br><span class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">Sqlsession session = sessionFactory.openSession();</span><br><span class="line">//执行SQL语句</span><br><span class="line">session.commit();//提交事务</span><br></pre></td></tr></table></figure>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<a id="more"></a>
-<h2 id="2、自动提交-每个dml语句自动提交"><a href="#2、自动提交-每个dml语句自动提交" class="headerlink" title="2、自动提交:每个dml语句自动提交"></a><strong>2、自动提交:每个dml语句自动提交</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Reader reader=Resource.getResourceAsReader(&quot;conf.xml&quot;)</span><br><span class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">Sqlsession session = sessionFactory.openSession(true);</span><br><span class="line">//执行SQL语句</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p><strong>总结:</strong> openSession()中什么函数都不写为手动提交，想要自动提交事务只需将openSession(true)方法中的函数写为true即可!</p>
-<h1 id="自增问题"><a href="#自增问题" class="headerlink" title="自增问题"></a><strong>自增问题</strong></h1><h2 id="1、MyBatis回写操作"><a href="#1、MyBatis回写操作" class="headerlink" title="1、MyBatis回写操作"></a><strong>1、MyBatis回写操作</strong></h2><pre><code>字段自增属性: auto_increment  (自动增加)
-注:  实体类中整形的属性最好使用包装类，因为int形的包装类在没有赋予值的情况下是有默认值0的，这会影响SQL语句中的自增属性
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-* Mysql数据库支持自增
-* Oracle数据库严格来说不支持自增 但能通过序列来模拟实现</code></pre><p>   <strong>字段自增属于Mysql的特性，当传入空值时，具有自增属性的字段回自动增加，但这仅仅只是在数据库中的操作，在将数据增加后,实体类中对应的字段仍然是空，那<br>    么，怎么样才能既让mysql发挥自己的特性，又让自增的数据回写回来呢？</strong><br>   <strong>很简单！</strong><br>   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--AddCust_table: 添加一个Cust_table， useGeneratedKeys="true"使用主键生成策略（使自增的主键可回写），keyProperty="custid":指定具体回写哪个键--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"AddCust_table"</span> <span class="attr">parameterType</span>=<span class="string">"Cust_table"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"custid"</span>&gt;</span></span><br><span class="line">    inset into cust_table values (#&#123;custid&#125;,#&#123;name&#125;,#&#123;telephone&#125;,#&#123;address&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>   *获取回写的值也很简单</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> //自增的数据的回写</span><br><span class="line">Cust_table cust_table=new Cust_table();</span><br><span class="line">cust_table.setCustid(null);</span><br><span class="line">cust_table.setName(&quot;大一&quot;);</span><br><span class="line">cust_table.setTelephone(&quot;123456&quot;);</span><br><span class="line">cust_table.setAddress(&quot;陕西&quot;);</span><br><span class="line">int isdown=session.getMapper(cust_tableMapper.class).AddCust_table(cust_table);</span><br><span class="line">System.out.println(&quot;回写的键为:&quot;+cust_table.getCustid());//直接取就行了，但只能在语句执行完成之后才可以</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p><strong>Oracle的解决方法:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">//首先，在数据库中创建一个自增序列，语句如下：</span><br><span class="line">创建    序列     myseq</span><br><span class="line">create sequence myseq</span><br><span class="line">            每次加1</span><br><span class="line">            increment by 1</span><br><span class="line">             从1开始</span><br><span class="line">            start with 1;</span><br><span class="line"> 这个序列自带两个值，且都在Oracle的默认表 dual中</span><br><span class="line">    nextval:自增后的值</span><br><span class="line">    currval:上一次自增的值</span><br><span class="line"></span><br><span class="line">方式一(先自增，后插入，推荐用这种！)、</span><br><span class="line">   通过&lt;insert&gt;的子标签&lt;selectKey&gt;实现:</span><br><span class="line">    在&lt;selectKey&gt;中查询下一个序列（自增后的值），再将此值传入keyProperty=&quot;需要自增的字段&quot;属性，最后真正</span><br><span class="line">    执行该sql时，使用改属性值。</span><br><span class="line">    &lt;!--增加一个学生Oracle--&gt;</span><br><span class="line">    &lt;insert id=&quot;addStudent&quot; parameterType=&quot;Student&quot; databaseId=&quot;oracle&quot;&gt;</span><br><span class="line">        &lt;selectKey keyProperty=&quot;stuNo&quot; resultType=&quot;Integer&quot; order=&quot;BEFORE&quot;&gt;</span><br><span class="line">                select myseq.nextval from dual</span><br><span class="line">        &lt;/selectKey&gt;</span><br><span class="line">    &lt;!--  这里的#&#123;stuNo&#125;就是上面keyProperty中的stuNo --&gt;</span><br><span class="line">        insert into student(stuno,stuName,stuAge,graName) values (#&#123;stuNo&#125;,#&#123;stuName&#125;,#&#123;stuAge&#125;,#&#123;graName&#125;)</span><br><span class="line">    &lt;/insert&gt;</span><br><span class="line"></span><br><span class="line">方式二(先插入，后查询)、</span><br><span class="line">   将order设为AFTER,改为先自增插入，后查询刚才自增后的值再返回</span><br><span class="line">    &lt;!--增加一个学生Oracle--&gt;</span><br><span class="line">    &lt;insert id=&quot;addStudent&quot; parameterType=&quot;Student&quot; databaseId=&quot;oracle&quot;&gt;</span><br><span class="line">        &lt;selectKey keyProperty=&quot;stuNo&quot; resultType=&quot;Integer&quot; order=&quot;AFTER&quot;&gt;</span><br><span class="line">                select myseq.currval from dual</span><br><span class="line">        &lt;/selectKey&gt;</span><br><span class="line">        insert into student(stuno,stuName,stuAge,graName) values (myseq.nextval,#&#123;stuName&#125;,#&#123;stuAge&#125;,#&#123;graName&#125;)</span><br><span class="line">    &lt;/insert&gt;</span><br></pre></td></tr></table></figure>
-
-
-
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
+        			<a href="/categories/helloWorld//" class="article-tag-list-link color1">helloWorld</a>
         		</li>
       		
 		</ul>
@@ -236,84 +195,16 @@
 
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/01/hello-world/">true >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/23/No.16_事务提交与不同数据库的自增方式/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/10/23/No.23_Mybatis架构和源码分析/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          No.16_事务提交与不同数据库的自增方式
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/10/23/No.15_多环境切换，注解与增删改返回值问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">No.15_多环境切换，注解与增删改返回值问题</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -333,14 +224,12 @@
 
 
 
-  
-  
-  
 
   
-
   
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 
 
@@ -363,8 +252,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
