@@ -140,105 +140,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Spring整合MyBatis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Spring整合MyBatis</p>
-<p>注意：虽然以后还会学很多的框架，会涉及很多的问题，但是记住一点，在整合关系上 永远是Spring框架整合其他框架，还有，Spring会自动提交事务。</p>
-<p>具体整合思路：<br>  MyBatis具体功能实现：SqlSessionFactory -&gt; SqlSession -&gt; StudentMapper -&gt;CRUD</p>
-<p>  可以发现，MyBatis最终是通过SqlSessionFactory来操作数据库，所以，Spring整合MyBatis其实就是 将MyBatis的SqlSessionFactory对象交给Spring来管理</p>
-<p>SM整合步骤：</p>
-<p>1、准备jar包</p>
-<pre><code>mybatis-spring.jar
-spring-tx.jar
-spring-jdbc.jar
-spring-expression.jar
-spring-context-support.jar
-spring-core.jar
-spring-context.jar
-spring-beans.jar
-spring-aop.jar
-spring-web.jar
-commons-logging.jar
-commons-dbcp.jar
-mysql-connector-java.jar
-mybatis.jar
-log4j.jar
-commons-pool.jar</code></pre><p>2、配合表创建类</p>
-<p>3、MyBatis配置文件cong.xml</p>
-<p>4、通过mapper.xml将 类、表建立映射关系</p>
-<p>5、之前使用Mybatis：conf.xml -&gt; SqlSessionFacotry  ,  现在整合的时候，需要通过Spring管理SqlSessionFactory，因此产生SqlSessionFactory所需要的数据库信息 不在放在conf.xml 而需要放在spring配置文件中</p>
-<p>   配置Spring的配置文件（applicationContext.xml）整合Mybatis<br>   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--整合MyBatis--&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 1、配置数据库信息（替代MyBatis配置文件conf.xml） --&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--加载db.properties配置文件--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"db"</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"locations"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>classpath:db.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"$&#123;mtsql8.driver&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;mysql8.url&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;mysql8.username&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;omysql8.password&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxActive"</span> <span class="attr">value</span>=<span class="string">"$&#123;mysql8.maxActive&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxIdle"</span> <span class="attr">value</span>=<span class="string">"$&#123;mysql8.maxIdle&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--2、在SpringIoc容器中 创建Mybatis的核心类 SqlSessionFactry--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"SqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 注入数据源 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 加载Mybatis的配置文件 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocation"</span> <span class="attr">value</span>=<span class="string">"classpath:Mybatis-config"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>6、使用Spring-Mybatis整合产物开发程序</p>
-<p>  目标：通过spring产生mybatis最终操作需要的 动态mapper对象，例如（studentMapper）。</p>
-<p>Spring 产生 动态Mapper对象有3种方法：</p>
-<p>a、第一种方式</p>
-<p>DAO层实现类  继承 SqlSessionDaoSupport类 ， 该类提供了一个属性SqlSession , 可以用于产生Mapper对象。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--        第一种方式生成mapper对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"StudentMapper"</span> <span class="attr">class</span>=<span class="string">"org.dao.StudentDaoImpl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">ref</span>=<span class="string">"SqlSessionFactory"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>b、第二种方式</p>
-<p>就是省略掉 第一种方式的 实现类</p>
-<p>直接使用MyBatis提供的 Mapper实现类：org.mybatis.spring.mapper.MapperFactoryBean</p>
-<p>缺点：每个mapper都需要一个 配置一次</p>
-<pre><code class="xml"><span class="comment">&lt;!--    第二种方式生成mapper对象--&gt;</span>
-    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"StudentMapper"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperFactoryBean"</span>&gt;</span>
-        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">ref</span>=<span class="string">"SqlSessionFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span><span class="comment">&lt;!--数据源 必须--&gt;</span>
-        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperInterface"</span> <span class="attr">value</span>=<span class="string">"org.mapper.StudentMapper"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span><span class="comment">&lt;!--自填--&gt;</span>
-    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></code></pre>
-<p>c、第三种方式</p>
-<p>批量配置实现类，使用MyBatis提供的    org.mybatis.spring.mapper.MapperScannerConfigurer</p>
-<p>使用方式：</p>
-<pre><code class="xml"><span class="comment">&lt;!--第三种方式生成mapper对象（批量生成多个mapper文件）</span>
-<span class="comment">        批量产生Mapper对像 在SpringIOC中的id值 默认就是 接口名（接口名=id值），注意 接口名小写</span>
-<span class="comment">     --&gt;</span>
-    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"mappers"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperScannerConfigurer"</span>&gt;</span>
-        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactoryBeanName"</span> <span class="attr">value</span>=<span class="string">"SqlSessionFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span><span class="comment">&lt;!--数据源 必须--&gt;</span>
-        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"basePackage"</span> <span class="attr">value</span>=<span class="string">"org.mapper"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span><span class="comment">&lt;!--批量配置,指定产生哪个包中的 mapper对象--&gt;</span>
-    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/06/Spring整合MyBatis/">true >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-No.23_Mybatis架构和源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -562,6 +463,93 @@ commons-pool.jar</code></pre><p>2、配合表创建类</p>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/23/No.20_trim标签与Mybatis的内置参数/">true >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-No.19_鉴别器和别名问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/No.19_鉴别器和别名问题/">No.19_鉴别器和别名问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/No.19_鉴别器和别名问题/" class="archive-article-date">
+  	<time datetime="2019-10-23T13:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ResultMap：字段和属性名的关系"><a href="#ResultMap：字段和属性名的关系" class="headerlink" title="ResultMap：字段和属性名的关系"></a>ResultMap：字段和属性名的关系</h1><h2 id="1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性"><a href="#1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性" class="headerlink" title="1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性"></a>1、当JavaBean类中的属性与表中的字段不一致时，可以使用resultMap，在字段和属性之间建立属性</h2><p>字段名和属性名一致时可以使用resultType,但当不一致时就只能使用resultMap了</p>
+        
+          <a class="article-more-a" href="/2019/10/23/No.19_鉴别器和别名问题/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/No.19_鉴别器和别名问题/">true >></a>
         </p>
       
 
