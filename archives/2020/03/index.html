@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>No.23_Mybatis架构和源码分析 | GQW的GitBLog</title>
+  <title>Archives: 2020/3 | GQW的GitBLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签">
-<meta name="keywords" content="Mybatis">
-<meta property="og:type" content="article">
-<meta property="og:title" content="No.23_Mybatis架构和源码分析">
-<meta property="og:url" content="http://yoursite.com/2019/10/27/No.23_Mybatis架构和源码分析/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="GQW的GitBLog">
+<meta property="og:url" content="http://yoursite.com/archives/2020/03/index.html">
 <meta property="og:site_name" content="GQW的GitBLog">
-<meta property="og:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2019-10-28T04:17:29.423Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No.23_Mybatis架构和源码分析">
-<meta name="twitter:description" content="Mybatix源码解析Mybatis中的运行步骤 a、获取SqlSessionFactory对象运用XMLConfigBuilder中的parse()解析器 parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签">
+<meta name="twitter:title" content="GQW的GitBLog">
   
     <link rel="alternative" href="/atom.xml" title="GQW的GitBLog" type="application/atom+xml">
   
@@ -143,218 +138,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-No.23_Mybatis架构和源码分析" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      No.23_Mybatis架构和源码分析
-    </h1>
-  
-
-        
-        <a href="/2019/10/27/No.23_Mybatis架构和源码分析/" class="archive-article-date">
-  	<time datetime="2019-10-27T03:05:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/03/06/Spring整合MyBatis/" class="archive-article-date">
+  	<time datetime="2020-03-06T11:28:45.241Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Mybatix源码解析"><a href="#Mybatix源码解析" class="headerlink" title="Mybatix源码解析"></a>Mybatix源码解析</h1><p><strong>Mybatis中的运行步骤</strong></p>
-<h2 id="a、获取SqlSessionFactory对象"><a href="#a、获取SqlSessionFactory对象" class="headerlink" title="a、获取SqlSessionFactory对象"></a>a、获取SqlSessionFactory对象</h2><p><strong>运用XMLConfigBuilder中的parse()解析器</strong></p>
-<p>parseConfiguration()通过configuration标签，设置了properties、settings、environments、mappers等属性标签</p>
-<a id="more"></a>
-<p>并且Mybatis底层将所有的配置信息 放在了Configuration对象中</p>
-<p>解析所有的xxxMapper.xml文件</p>
-<p>&lt;select(等标签中的) id=”” resultType=”” parameterType=””（等属性 是通过parseStatementNode()解析的）&gt;，会将xxxMapper.xml中的<select>等标签解析成 MappedStatement对象（它代表一个增|删|改|查对象）</select></p>
-<p>=====即 MappedStatement对象 就是 <select>等标签</select></p>
-<p>结论：MapperStatement存在于Configuration中，environment等配置文件中的标签也存在于Configuration,可得出结论：<strong>所有的配置信息、增删改标签 全部存在于Configuration中，Configuration又存在于DefaultSqlSessionFactory对象中，DefaultSqlSessionFactory对像就是外部使用的SqlSessionFactory对象</strong></p>
-<p>它们之间的包含关系：SqlSessionFactory对象 -&gt; DefaultSqlSessionFactory -&gt; Configuration -&gt; 包含了一切配置信息</p>
-<h2 id="b、获取SqlSession对象"><a href="#b、获取SqlSession对象" class="headerlink" title="b、获取SqlSession对象"></a>b、获取SqlSession对象</h2><p> configuration.newExecutor(tx,exectype)通过这个方法获取执行器，默认类型为Simple（SimpleExecutor）,参数tx的类型为Transaction,它提供事务处理，而方法本身则会根据不同的类型（execType)产生不同的执行器（Executor）</p>
-<p> 并对执行器进行拦截操作：executor = (Executor)interceptorChain.pluginAll(executor);也叫装饰模式，通过装饰（包装）模式，为executor加强一些功能，将其包装成为一个更为强大的executor</p>
-<p> //拦截器的作用：以后，如果给Mybatis写自己的插件，就可以通过拦截器实现</p>
-<p> //Mybatis的插件开发一共就两步：1、写插件；2、放入拦截器</p>
-<p> 返回new DefaultSqlSession(configuration,executor,是否自动提交事务)对象</p>
-<p> SqlSession怎么来的呢：SqlSession -&gt; openSession -&gt; openSessionFromDataSource() -&gt; DefaultSqlSession对象</p>
-<h2 id="c-d、获取xxxMapper代理对象-lt-代理接口中的方法、xxxMapper-xml文件中等标签-、执行等标签中定义的SQL语句"><a href="#c-d、获取xxxMapper代理对象-lt-代理接口中的方法、xxxMapper-xml文件中等标签-、执行等标签中定义的SQL语句" class="headerlink" title="c/d、获取xxxMapper代理对象 &lt;-(代理接口中的方法、xxxMapper.xml文件中等标签)、执行等标签中定义的SQL语句"></a>c/d、获取xxxMapper代理对象 &lt;-(代理接口中的方法、xxxMapper.xml文件中<select>等标签)、执行</select><select>等标签中定义的SQL语句</select></h2><p>   执行增删改查 -&gt; 被MapperProxy的invoke() 方法拦截 -&gt; invoke()方法又实现自InvocationHandler：JDK动态代理接口（用到了动态代理模式：将增删改查的执行权交给了代理对象：MapperProxy） -&gt; 最后代理对象帮我们“代理执行”增删改查方法</p>
-<p>   问：为什么xxxMapper是代理对象呢？答：因为它就是MapperProxy。</p>
-<p>   mapperMethod.execute(SqlSession,args)：实际调用增删改查的方法，依靠了SqlSession中的configuration 和 executor  </p>
-<p>   method.convertArgsToSqlCommandParam(args); ：处理增删改查方法的参数，如果参数是0个，return null;如果参数是1个，返回第一个参数；如果有多个参数，则将参数放到map中</p>
-<p>   如果查询条件只有一个，执行selectOne(); -&gt; 执行selectList() ：调用configuration.getMappedStatment(),即获取到增删改查的对象</p>
-<p>   boundSql：将我们写的SQL 和 参数值进行拼接后的对象，即最终最终能被真正执行的SQL</p>
-<p>   执行SQL 最中是通过Executor ，如果缓存中没有要查询的内容，则进入数据库 真实查询：queryFormDatabase()</p>
-<p>   核心对象StatmentHandler,是Statment对象的处理类  </p>
-<p>   MyBatis在底层使用的JDBC对象是PreparedStatement</p>
-<p>   底层执行增删改查：调用PreparedStatement的execute()方法执行</p>
-<p>   MyBatis底层在执行CRUD(增删改查)时 可能会涉及到四个处理器：StatementHandler  ParameterHandler  TypeHandler  ResultSetHandler</p>
-<p>   通过调试发现xxxMapper里包含：SqlSession[configuration,executor,事务]     mapperInterface接口代理对象     methodCache（存放查询缓存，底层是CurrentHashMap(可以处理高并发问题的Map)）</p>
-<h2 id="四大处理器Handler"><a href="#四大处理器Handler" class="headerlink" title="四大处理器Handler"></a>四大处理器Handler</h2><p>   <strong>StatementHandler：（根对象）处理对象PreparedStatement 的控制器</strong></p>
-<p>   <strong>ParameterHandler：处理参数 的控制器</strong></p>
-<p>   <strong>TypeHandler：类型转换 的控制器</strong></p>
-<p>   <strong>ResultSetHandler：处理结果集 的控制器</strong>      </p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢你的支持，希望这些可以帮到你<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
+    	 
+        <div class="article-info info-on-right">
+          
+          
 
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/27/No.23_Mybatis架构和源码分析/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/03/06/Spring整合MyBatis/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/10/23/No.22_使用逆向工程进行快速开发/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">No.22_使用逆向工程进行快速开发</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -377,8 +197,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
